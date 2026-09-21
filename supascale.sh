@@ -276,8 +276,9 @@ generate_password() {
 # Fix related to Github issue 5 (https://github.com/LambdaSoftworks/Supascale/issues/5)
 generate_encryption_key() {
   # Use /dev/urandom, filter for alphanumeric, take first 32 chars
+  # using the C locale for corss-platform compatibility.
   # Required for AES-256-GCM encryption (256 bits = 32 bytes)
-  tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 32
+  LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 32
 }
 
 # Function to generate JWT token using the JWT_SECRET

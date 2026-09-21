@@ -268,7 +268,8 @@ list_projects() {
 # Function to generate a random password (alphanumeric, 40 chars)
 generate_password() {
   # Use /dev/urandom, filter for alphanumeric, take first 40 chars
-  tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 40
+  # using the C locale for corss-platform compatibility.
+  LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 40
 }
 
 # Function to generate a random encryption key (alphanumeric, 32 chars for AES-256)
